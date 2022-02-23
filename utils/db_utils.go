@@ -9,7 +9,7 @@ import (
 )
 
 func GetDb() (*gorm.DB, error) {
-	dsn := "host=localhost user=rizal password=qwerty123 dbname=bpr_2 port=5432 sslmode=disable TimeZone=UTC"
+	dsn := "host=localhost user=rizal password=qwerty123 dbname=bpr port=5432 sslmode=disable TimeZone=UTC"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 
 		// add configuration for singular table name
