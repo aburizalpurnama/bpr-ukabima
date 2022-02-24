@@ -1,14 +1,13 @@
 package nasabahPeroranganPersonal
 
 import (
-	"bprukabima/nasabah"
 	"time"
 )
 
 type NasabahPeroranganPersonal struct {
-	ID                           int `gorm:"column:id_nasabah_perorangan_personal"`
-	IdNasabahPerorangan          int
-	Nasabah                      nasabah.Nasabah `gorm:"foreignKey:IdNasabahPerorangan"`
+	ID                  int `gorm:"column:id_nasabah_perorangan_personal"`
+	IdNasabahPerorangan int
+	// Nasabah                      nasabah.Nasabah `gorm:"foreignKey:IdNasabahPerorangan"`
 	JenisKelamin                 int
 	IdPropinsiLahir              int
 	IdKotaKabupatenLahir         int
@@ -25,4 +24,13 @@ type NasabahPeroranganPersonal struct {
 	PerjanjianPisahHarta         int
 	JumlahAnak                   int
 	DEntry                       time.Time
+}
+
+type Tabler interface {
+	TableName() string
+}
+
+// TableName overrides the table name used by User to `profiles`
+func (NasabahPeroranganPersonal) TableName() string {
+	return "m_nasabah_perorangan_personal"
 }
