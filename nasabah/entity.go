@@ -3,7 +3,7 @@ package nasabah
 import "time"
 
 type Nasabah struct {
-	ID                         int `gorm:"column:id_nasabah_perorangan;"`
+	ID                         int `gorm:"column:id_nasabah_perorangan"`
 	DEntry                     time.Time
 	NomorRegisterNasabah       string
 	NamaIdentitas              string
