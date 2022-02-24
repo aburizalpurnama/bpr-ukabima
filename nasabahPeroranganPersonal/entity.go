@@ -7,8 +7,8 @@ import (
 
 type NasabahPeroranganPersonal struct {
 	ID                           int `gorm:"column:id_nasabah_perorangan_personal"`
-	NasabahId                    int
-	Nasabah                      nasabah.Nasabah
+	IdNasabahPerorangan          int
+	Nasabah                      nasabah.Nasabah `gorm:"foreignKey:IdNasabahPerorangan"`
 	JenisKelamin                 int
 	IdPropinsiLahir              int
 	IdKotaKabupatenLahir         int
@@ -24,4 +24,5 @@ type NasabahPeroranganPersonal struct {
 	NamaPasangan                 string
 	PerjanjianPisahHarta         int
 	JumlahAnak                   int
+	DEntry                       time.Time
 }
