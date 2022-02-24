@@ -42,10 +42,10 @@ func main() {
 	nasabahRepository := nasabah.NewRepository(db)
 
 	nasabah := nasabah.NewNasabah()
-	nasabah.IdNasabahPerorangan = 92002
+	// nasabah.IdNasabahPerorangan = 92002
 	nasabah.DEntry = time.Now()
 	nasabah.IsBlacklist = false
-	nasabah.NamaIdentitas = "Test"
+	nasabah.NamaIdentitas = "RizalTest"
 	nasabah.IdGolDeb = 557
 	nasabah.IdPropinsiIdentitas = 33
 	nasabah.IdKotaKabupatenIdentitas = 3312

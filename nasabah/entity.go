@@ -3,7 +3,7 @@ package nasabah
 import "time"
 
 type Nasabah struct {
-	IdNasabahPerorangan        int
+	ID                         int `gorm:"column:id_nasabah_perorangan;"`
 	DEntry                     time.Time
 	NomorRegisterNasabah       string
 	NamaIdentitas              string
@@ -13,7 +13,7 @@ type Nasabah struct {
 	IdGolDeb                   int //GolDeb
 	TipeIdentitas              int
 	NoIdentitas                string
-	TglKadaluarsaIdentitas     time.Time `json:"tgl_kadaluarsa_identitas"`
+	TglKadaluarsaIdentitas     time.Time
 	StatusSeumurHidupIdentitas bool
 	NoNpwp                     string
 	NoMobile                   string
@@ -31,20 +31,29 @@ type Nasabah struct {
 	IdKelurahanDomisili        int // Kelurahan
 	IdKodePosDomisili          int // KodePos
 	AlamatEmail                string
-	IdBpr                      int       // Bpr
-	BprCabang                  int       // BprCabang
-	IsBlacklist                bool      // not null
-	DBlacklist                 time.Time `json:"d_blacklist"`
+	IdBpr                      int  // Bpr
+	BprCabang                  int  // BprCabang
+	IsBlacklist                bool // not null
+	DBlacklist                 time.Time
 	DomisiliSesuaiIdentitas    bool
 	KeteranganDiblacklist      string
 	SaldoTabunganDeposito      int64
 	StatusApprove              bool
 }
 
-// function to custome table name
-func (*Nasabah) TableName() string {
+type Tabler interface {
+	TableName() string
+}
+
+// TableName overrides the table name used by User to `profiles`
+func (Nasabah) TableName() string {
 	return "m_nasabah_perorangan_umum"
 }
+
+// // function to custome table name
+// func (*Nasabah) TableName() string {
+// 	return "m_nasabah_perorangan_umum"
+// }
 
 // No args Constructor
 func NewNasabah() *Nasabah {
