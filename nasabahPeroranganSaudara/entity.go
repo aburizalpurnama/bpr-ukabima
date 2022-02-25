@@ -17,7 +17,12 @@ type NasabahPeroranganSaudara struct {
 	NoMobile           string `gorm:"column:no_mobile_saudara"`
 	AhliWarisSaudara   string
 	HubunganSaudara    string
-	DEntry             time.Time
+
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {

@@ -4,7 +4,6 @@ import "time"
 
 type Nasabah struct {
 	ID                         int `gorm:"column:id_nasabah_perorangan"`
-	DEntry                     time.Time
 	NomorRegisterNasabah       string
 	NamaIdentitas              string
 	GelarDepan                 string
@@ -39,6 +38,12 @@ type Nasabah struct {
 	KeteranganDiblacklist      string
 	SaldoTabunganDeposito      int64
 	StatusApprove              bool
+
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {

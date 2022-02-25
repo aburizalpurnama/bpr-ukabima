@@ -11,7 +11,12 @@ type NasabahPeroranganInfo struct {
 	IdNegara           int `gorm:"column:id_negara_lainnya"`
 	IdHubunganPelapor  int
 	IdReferensiNasabah int
-	DEntry             time.Time
+
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {

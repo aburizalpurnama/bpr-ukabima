@@ -1,4 +1,4 @@
-package nasabahPeroranganPekerajaan
+package nasabahPeroranganPekerjaan
 
 import "time"
 
@@ -16,7 +16,12 @@ type NasabahPeroranganPekerjaan struct {
 	NasabahBeresiko          string
 	Pep                      bool `gorm:"column:id_nasabah_perorangan_pekerjaan"`
 	IdGroupAnggota           int
-	DEntry                   time.Time
+
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {

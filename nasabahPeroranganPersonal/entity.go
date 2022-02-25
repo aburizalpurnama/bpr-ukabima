@@ -23,7 +23,12 @@ type NasabahPeroranganPersonal struct {
 	NamaPasangan                 string
 	PerjanjianPisahHarta         int
 	JumlahAnak                   int
-	DEntry                       time.Time
+
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {

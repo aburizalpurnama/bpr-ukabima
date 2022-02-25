@@ -15,7 +15,11 @@ type NasabahPeroranganAlamatUsaha struct {
 	IdKodePos   int    `gorm:"column:id_kode_pos_alamatusaha"`
 	NoTelp      string `gorm:"column:no_telp_alamatusaha"`
 
-	DEntry time.Time
+	// Base entity
+	IdEntry  string
+	IdUpdate string
+	DEntry   time.Time
+	DUpdate  time.Time
 }
 
 type Tabler interface {
