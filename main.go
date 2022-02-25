@@ -1,10 +1,17 @@
 package main
 
 import (
+	"bprukabima/handler"
 	"bprukabima/nasabah"
+	"bprukabima/nasabahPeroranganAlamatUsaha"
+	"bprukabima/nasabahPeroranganInfo"
+	"bprukabima/nasabahPeroranganPekerjaan"
+	"bprukabima/nasabahPeroranganPersonal"
+	"bprukabima/nasabahPeroranganSaudara"
 	"bprukabima/utils"
 	"log"
-	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // func main() {
@@ -38,27 +45,27 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	// create instance of repository
-	nasabahRepository := nasabah.NewRepository(db)
+	// Create repositories
+	nGeneralRepo := nasabah.NewRepository(db)
+	nAlamatUsahaRepo := nasabahPeroranganAlamatUsaha.NewRepository(db)
+	nInfoRepo := nasabahPeroranganInfo.NewRepository(db)
+	nPersonalRepo := nasabahPeroranganPersonal.NewRepository(db)
+	nPekerjaanRepo := nasabahPeroranganPekerjaan.NewRepository(db)
+	nSaudaraRepo := nasabahPeroranganSaudara.NewRepository(db)
 
-	nasabah := nasabah.NewNasabah()
-	// nasabah.IdNasabahPerorangan = 92002
-	nasabah.DEntry = time.Now()
-	nasabah.IsBlacklist = false
-	nasabah.NamaIdentitas = "RizalTest"
-	nasabah.IdGolDeb = 557
-	nasabah.IdPropinsiIdentitas = 33
-	nasabah.IdKotaKabupatenIdentitas = 3312
-	nasabah.IdKecamatanIdentitas = 3312150
-	nasabah.IdKelurahanIdentitas = 3312150008
-	nasabah.IdKodePosIdentitas = 39615
-	nasabah.IdPropinsiDomisili = 33
-	nasabah.IdKotaKabupatenDomisili = 3312
-	nasabah.IdKecamatanDomisili = 3312150
-	nasabah.IdKelurahanDomisili = 3312150008
-	nasabah.IdKodePosDomisili = 39615
-	nasabah.IdBpr = 2
-	nasabah.BprCabang = 1
+	// Create service
+	nService := nasabah.NewService(nGeneralRepo, nAlamatUsahaRepo, nInfoRepo, nPersonalRepo, nPekerjaanRepo, nSaudaraRepo)
 
-	nasabahRepository.Save(*nasabah)
+	// Create handler
+	nHandler := handler.NewNasabahHandler(nService)
+
+	router := gin.Default()
+
+	// API Versioning
+	api := router.Group("/api/v1")
+
+	api.POST("/create/permohonanNasabahBimaApps", nHandler.RegisterNasabah)
+
+	router.Run()
+
 }
