@@ -12,7 +12,7 @@ import (
 )
 
 type NasabahService interface {
-	RegisterNasabah(input InputRegisterNasabah) (NasabahRegisterResponse, error)
+	RegisterNasabah(input InputRegisterNasabah) (Nasabah, error)
 }
 
 type nasabahService struct {
@@ -44,10 +44,10 @@ func NewService(
 
 }
 
-func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahRegisterResponse, error) {
+func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (Nasabah, error) {
 
 	// create response object
-	response := NasabahRegisterResponse{}
+	response := &NasabahRegisterResponse{}
 
 	// insert nasabahGeneral
 	nGeneral := Nasabah{}
@@ -88,7 +88,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_umum"
-		return response, generalRepoErr
+		return savedNGeneral, generalRepoErr
 	}
 
 	// insert nasabahPersonal
@@ -119,7 +119,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_personal"
-		return response, personalRepoErr
+		return savedNGeneral, personalRepoErr
 	}
 
 	// insert nasabahPekerajaan
@@ -141,7 +141,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_pekerjaan"
-		return response, pekerjaanRepoErr
+		return savedNGeneral, pekerjaanRepoErr
 	}
 
 	// insert nasabahAlamatUsaha
@@ -163,7 +163,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_alamat_usaha"
-		return response, alamatURepoErr
+		return savedNGeneral, alamatURepoErr
 	}
 
 	// insert nasabahSaudara
@@ -188,7 +188,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_saudara"
-		return response, saudaraRepoErr
+		return savedNGeneral, saudaraRepoErr
 	}
 
 	// insert nasabahInformasi
@@ -209,7 +209,7 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 
 		response.code = "404"
 		response.status = "Gagal menyimpan nasabah_perorangan_info_lainnya"
-		return response, infoRepoErr
+		return savedNGeneral, infoRepoErr
 	}
 
 	// insert response model
@@ -220,5 +220,5 @@ func (s *nasabahService) RegisterNasabah(input InputRegisterNasabah) (NasabahReg
 	response.code = "200"
 	response.status = "BERHASIL"
 
-	return response, nil
+	return savedNGeneral, nil
 }
