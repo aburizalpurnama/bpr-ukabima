@@ -12,7 +12,7 @@ import (
 )
 
 type NasabahService interface {
-	RegisterNasabah()
+	RegisterNasabah(input InputRegisterNasabah) (NasabahRegisterResponse, error)
 }
 
 type nasabahService struct {
