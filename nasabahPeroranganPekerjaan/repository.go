@@ -1,4 +1,4 @@
-package nasabahPeroranganPekerajaan
+package nasabahPeroranganPekerjaan
 
 import (
 	"log"
